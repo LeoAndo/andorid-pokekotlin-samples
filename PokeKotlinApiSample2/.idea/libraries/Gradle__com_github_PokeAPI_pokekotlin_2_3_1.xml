@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.PokeAPI:pokekotlin:2.3.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.PokeAPI/pokekotlin/2.3.1/bc26d13a5ae8cea67f7a5425faeb2d6ef0f94bfe/pokekotlin-2.3.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.PokeAPI/pokekotlin/2.3.1/55e94cdba797584f180d0ed03208cb05c07eea25/pokekotlin-2.3.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
