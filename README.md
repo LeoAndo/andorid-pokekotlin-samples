@@ -13,5 +13,6 @@ use pokekotlin api samples (Android)
 
 ## [For Java](https://github.com/LeoAndo/andorid-pokekotlin-samples/tree/main/PokeKotlinApiSample<br>)
 
+## [For Kotlin](https://github.com/LeoAndo/andorid-pokekotlin-samples/tree/main/PokeKotlinApiSample2)
 
 ## [Coding Flow (Java)](https://www.youtube.com/watch?v=cDr-HNMeFww)
