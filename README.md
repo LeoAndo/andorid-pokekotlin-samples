@@ -1,8 +1,6 @@
 # Overview
 
-use pokekotlin api samples (Android)
-
-## [API](https://github.com/PokeAPI/pokekotlin)
+use [pokekotlin api](https://github.com/PokeAPI/pokekotlin) samples (Android)
 
 ## Capture
 
