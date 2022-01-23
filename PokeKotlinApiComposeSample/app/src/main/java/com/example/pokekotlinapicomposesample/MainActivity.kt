@@ -43,6 +43,11 @@ fun PokemonScreen(viewModel: PokemonViewModel) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     Scaffold(
+        topBar = {
+            TopAppBar(
+                content = { Text(text = "ComposeSample") }
+            )
+        },
         snackbarHost = { SnackbarHost(snackbarHostState) },
         content = { innerPadding ->
             PokemonContent(
