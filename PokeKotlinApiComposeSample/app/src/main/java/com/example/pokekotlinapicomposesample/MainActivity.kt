@@ -63,7 +63,10 @@ fun PokemonScreen(viewModel: PokemonViewModel) {
                 },
                 showSnackBarMessage = {
                     // show snackbar as a suspend function
-                    scope.launch { snackbarHostState.showSnackbar(it) }
+                    scope.launch {
+                        snackbarHostState.showSnackbar(it)
+                        viewModel.showSnackBarCompleted()
+                    }
                 }
             )
         }
@@ -100,7 +103,7 @@ fun PokemonContent(
         }
 
         when (uiState) {
-            UiState.Initial -> {}
+            UiState.Initial, UiState.ShowSnackBarCompleted -> {}
             is UiState.Error -> {
                 showSnackBarMessage(uiState.errorMessage)
             }
