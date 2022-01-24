@@ -14,7 +14,6 @@ use [pokekotlin api](https://github.com/PokeAPI/pokekotlin) samples (Android)
 
 
 ## [For Jetpack Compose](https://github.com/LeoAndo/andorid-pokekotlin-samples/tree/main/PokeKotlinApiComposeSample)
-- There is a problem that many SnackBars are displayed.(Will be supported later.)
 
 ## [For Kotlin](https://github.com/LeoAndo/andorid-pokekotlin-samples/tree/main/PokeKotlinApiSample2)
 
