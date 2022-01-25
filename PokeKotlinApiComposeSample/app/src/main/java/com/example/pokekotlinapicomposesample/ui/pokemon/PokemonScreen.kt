@@ -1,6 +1,5 @@
 package com.example.pokekotlinapicomposesample.ui.pokemon
 
-import android.R
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -106,7 +105,7 @@ fun PokemonContent(
                         data = uiState.url,
                         builder = {
                             crossfade(true)
-                            placeholder(drawableResId = R.drawable.btn_star)
+                            placeholder(drawableResId = android.R.drawable.btn_star)
                         }
                     ),
                     contentDescription = "Pokemon Image",
