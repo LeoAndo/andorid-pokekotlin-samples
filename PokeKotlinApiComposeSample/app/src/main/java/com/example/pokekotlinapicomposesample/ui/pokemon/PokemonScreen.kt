@@ -2,10 +2,7 @@ package com.example.pokekotlinapicomposesample.ui.pokemon
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -21,17 +18,22 @@ import com.example.pokekotlinapicomposesample.PokemonViewModel
 import com.example.pokekotlinapicomposesample.UiState
 import com.example.pokekotlinapicomposesample.extention.mainContentPadding
 import com.example.pokekotlinapicomposesample.ui.theme.PokeKotlinApiComposeSampleTheme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 @Composable
 fun PokemonScreen(
     viewModel: PokemonViewModel = viewModel(),
     scaffoldState: ScaffoldState = rememberScaffoldState(),
-    scope: CoroutineScope = rememberCoroutineScope(),
 ) {
     var pokemonIdText by remember { mutableStateOf("") }
     var isEnableButton by remember { mutableStateOf(false) }
+    val snackBarMessage by viewModel.snackBarMessage.collectAsState(initial = null)
+
+    LaunchedEffect(key1 = snackBarMessage, block = {
+        snackBarMessage?.let {
+            scaffoldState.snackbarHostState.showSnackbar(it)
+        }
+    })
+
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -52,13 +54,6 @@ fun PokemonScreen(
                 onClickSearchButton = {
                     viewModel.searchPokemon(pokemonIdText)
                 },
-                showSnackBarMessage = {
-                    // show snackbar as a suspend function
-                    scope.launch {
-                        scaffoldState.snackbarHostState.showSnackbar(it)
-                        viewModel.showSnackBarCompleted()
-                    }
-                }
             )
         }
     )
@@ -72,8 +67,7 @@ fun PokemonContent(
     pokemonIdText: String,
     isEnableButton: Boolean,
     onValueChange: (String) -> Unit,
-    onClickSearchButton: () -> Unit,
-    showSnackBarMessage: (String) -> Unit
+    onClickSearchButton: () -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -95,9 +89,12 @@ fun PokemonContent(
         }
 
         when (uiState) {
-            UiState.Initial, UiState.ShowSnackBarCompleted -> {}
+            UiState.Initial -> {}
             is UiState.Error -> {
-                showSnackBarMessage(uiState.errorMessage)
+                Text(
+                    text = uiState.errorMessage,
+                    modifier = Modifier.wrapContentSize(),
+                )
             }
             is UiState.PokemonData -> {
                 Image(
@@ -139,7 +136,6 @@ fun PokemonContent_Preview_Error() {
             onValueChange = {},
             uiState = UiState.Error("error!!!!"),
             onClickSearchButton = {},
-            showSnackBarMessage = {}
         )
     }
 }
@@ -159,7 +155,6 @@ fun PokemonContent_Preview_NotEmpty() {
             onValueChange = {},
             uiState = UiState.PokemonData(id = 1, name = "abc", url = null),
             onClickSearchButton = {},
-            showSnackBarMessage = {}
         )
     }
 }
@@ -179,7 +174,6 @@ fun PokemonContent_Preview_Empty() {
             onValueChange = {},
             uiState = UiState.Initial,
             onClickSearchButton = {},
-            showSnackBarMessage = {}
         )
     }
 }
