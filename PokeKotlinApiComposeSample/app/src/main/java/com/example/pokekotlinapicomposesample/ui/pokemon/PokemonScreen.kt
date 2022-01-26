@@ -68,7 +68,7 @@ fun PokemonContent(
     onClickSearchButton: () -> Unit,
     onError: (String) -> Unit,
 ) {
-    Log.d("PokemonScreen", "PokemonContent uiState: " + uiState)
+    Log.d("PokemonScreen", "PokemonContent uiState: $uiState")
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
