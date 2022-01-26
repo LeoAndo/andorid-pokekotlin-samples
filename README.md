@@ -4,7 +4,7 @@ use [pokekotlin api](https://github.com/PokeAPI/pokekotlin) samples (Android)
 
 # development environment
 
-<img width="686" alt="スクリーンショット 2022-01-24 2 47 00" src="https://user-images.githubusercontent.com/16476224/150691098-abe2be92-8975-428f-b4e4-377e6b6ca8e6.png">
+<img width="686" alt="スクリーンショット 2022-01-26 21 18 17" src="https://user-images.githubusercontent.com/16476224/151161664-fa8cffbe-27ee-4ce0-bf32-6297aa34d959.png">
 
 ## Capture (Pixel 4 OS12)
 
