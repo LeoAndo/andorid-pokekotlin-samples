@@ -1,6 +1,7 @@
 package com.example.pokekotlinapicomposesample.ui.pokemon
 
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -26,20 +27,18 @@ fun PokemonScreen(
 ) {
     var pokemonIdText by remember { mutableStateOf("") }
     var isEnableButton by remember { mutableStateOf(false) }
-    val snackBarMessage by viewModel.snackBarMessage.collectAsState(initial = null)
+    // val snackBarMessage by viewModel.snackBarMessage.collectAsState(initial = null)
+    var errorMessage: String? by remember { mutableStateOf(null) }
 
-    LaunchedEffect(key1 = snackBarMessage, block = {
-        snackBarMessage?.let {
-            scaffoldState.snackbarHostState.showSnackbar(it)
-        }
+    LaunchedEffect(key1 = errorMessage, block = {
+        Log.d("PokemonScreen", "LaunchedEffect snackBarMessage $errorMessage")
+        errorMessage?.let { scaffoldState.snackbarHostState.showSnackbar(it) }
     })
 
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            TopAppBar(
-                content = { Text(text = "ComposeSample") }
-            )
+            TopAppBar(content = { Text(text = "ComposeSample") })
         },
         content = { innerPadding ->
             PokemonContent(
@@ -51,9 +50,8 @@ fun PokemonScreen(
                     pokemonIdText = it
                     isEnableButton = it.isNotEmpty()
                 },
-                onClickSearchButton = {
-                    viewModel.searchPokemon(pokemonIdText)
-                },
+                onClickSearchButton = { viewModel.searchPokemon(pokemonIdText) },
+                onError = { errorMessage = it },
             )
         }
     )
@@ -67,8 +65,10 @@ fun PokemonContent(
     pokemonIdText: String,
     isEnableButton: Boolean,
     onValueChange: (String) -> Unit,
-    onClickSearchButton: () -> Unit
+    onClickSearchButton: () -> Unit,
+    onError: (String) -> Unit,
 ) {
+    Log.d("PokemonScreen", "PokemonContent uiState: " + uiState)
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -95,6 +95,8 @@ fun PokemonContent(
                     text = uiState.errorMessage,
                     modifier = Modifier.wrapContentSize(),
                 )
+                onError(uiState.errorMessage)
+                Log.d("PokemonScreen", "UiState Error: ${uiState.errorMessage}")
             }
             is UiState.PokemonData -> {
                 Image(
@@ -136,6 +138,7 @@ fun PokemonContent_Preview_Error() {
             onValueChange = {},
             uiState = UiState.Error("error!!!!"),
             onClickSearchButton = {},
+            onError = {},
         )
     }
 }
@@ -155,6 +158,7 @@ fun PokemonContent_Preview_NotEmpty() {
             onValueChange = {},
             uiState = UiState.PokemonData(id = 1, name = "abc", url = null),
             onClickSearchButton = {},
+            onError = {},
         )
     }
 }
@@ -174,6 +178,7 @@ fun PokemonContent_Preview_Empty() {
             onValueChange = {},
             uiState = UiState.Initial,
             onClickSearchButton = {},
+            onError = {},
         )
     }
 }

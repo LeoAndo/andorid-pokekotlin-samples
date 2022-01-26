@@ -17,8 +17,8 @@ import me.sargunvohra.lib.pokekotlin.client.PokeApi
 class PokemonViewModel : ViewModel() {
     var uiState by mutableStateOf<UiState>(UiState.Initial)
         private set
-    private val _snackBarMessage = MutableSharedFlow<String>()
-    val snackBarMessage: SharedFlow<String> = _snackBarMessage
+//    private val _snackBarMessage = MutableSharedFlow<String>()
+//    val snackBarMessage: SharedFlow<String> = _snackBarMessage
 
     fun searchPokemon(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -30,7 +30,7 @@ class PokemonViewModel : ViewModel() {
                     UiState.PokemonData(id = it.id, name = it.name, url = it.sprites.backDefault)
             }.onFailure {
                 uiState = UiState.Error(it.localizedMessage ?: "error!")
-                _snackBarMessage.emit(it.localizedMessage ?: "error!")
+                // _snackBarMessage.emit(it.localizedMessage ?: "error!")
             }
         }
     }
